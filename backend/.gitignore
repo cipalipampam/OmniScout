@@ -1,0 +1,51 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Secrets & Env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Storage: Sessions (Browser profiles / cookies) & Exports (CSV Scraping)
+storage/sessions/*_profile/
+storage/sessions/**/Default/
+storage/sessions/**/Profile*/
+storage/exports/*.csv
+storage/exports/*.json
+storage/exports/*.parquet
+
+# Keep structure files
+!storage/sessions/README.md
+!storage/sessions/.gitkeep
+!storage/exports/README.md
+!storage/exports/.gitkeep
+!storage/dictionaries/README.md
+!storage/dictionaries/.gitkeep
+
+# Model weights (>100MB rejected by GitHub)
+saved_models/**/*.pt
+saved_models/**/*.bin
+saved_models/**/*.safetensors
+saved_models/**/*.onnx
+!saved_models/**/README.md
+!saved_models/**/.gitkeep
+!saved_models/**/model_config.json
+!saved_models/**/label_mapping.json
+
+# Scratch & testing
+.pytest_cache/
+.coverage
+scratch/

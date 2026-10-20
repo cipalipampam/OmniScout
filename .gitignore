@@ -1,0 +1,186 @@
+# ============================================================
+#  OmniScout — Root .gitignore
+#  Covers: Backend (Python/FastAPI) + Frontend (React/Next/Vue)
+#  + General development tooling
+# ============================================================
+
+
+# ─────────────────────────────────────────
+#  PYTHON / BACKEND
+# ─────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.Python
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+MANIFEST
+
+# Type checkers & linters
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# Test & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# pyenv / pipenv / poetry
+.python-version
+Pipfile.lock
+poetry.lock
+
+
+# ─────────────────────────────────────────
+#  FRONTEND (React / Next.js / Vue / Vite)
+# ─────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/out/
+frontend/.nuxt/
+frontend/.output/
+frontend/.vite/
+
+# Cache
+frontend/.cache/
+frontend/.turbo/
+
+# Test
+frontend/coverage/
+
+# Lock files (keep one, ignore the others)
+# Uncomment whichever you are NOT using:
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+
+# ─────────────────────────────────────────
+#  SECRETS & ENVIRONMENT
+# ─────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.p12
+secrets/
+
+
+# ─────────────────────────────────────────
+#  LOGS & RUNTIME
+# ─────────────────────────────────────────
+*.log
+*.log.*
+logs/
+backend/logs/
+
+
+# ─────────────────────────────────────────
+#  STORAGE — scraping data & sessions
+# ─────────────────────────────────────────
+# Browser session / cookie profiles
+backend/storage/sessions/*_profile/
+backend/storage/sessions/**/Default/
+backend/storage/sessions/**/Profile*/
+
+# Raw scraping results (CSV / JSON / Parquet)
+backend/storage/exports/*.csv
+backend/storage/exports/*.json
+backend/storage/exports/*.parquet
+
+# Preserve folder structure in Git
+!backend/storage/sessions/README.md
+!backend/storage/sessions/.gitkeep
+!backend/storage/exports/README.md
+!backend/storage/exports/.gitkeep
+!backend/storage/dictionaries/README.md
+!backend/storage/dictionaries/.gitkeep
+
+
+# ─────────────────────────────────────────
+#  SAVED MODELS (file besar > 100 MB)
+# ─────────────────────────────────────────
+backend/saved_models/**/*.pt
+backend/saved_models/**/*.bin
+backend/saved_models/**/*.safetensors
+backend/saved_models/**/*.onnx
+
+# Tapi tetap simpan metadata
+!backend/saved_models/**/README.md
+!backend/saved_models/**/.gitkeep
+!backend/saved_models/**/model_config.json
+!backend/saved_models/**/label_mapping.json
+
+
+# ─────────────────────────────────────────
+#  EDITOR & OS
+# ─────────────────────────────────────────
+
+# VSCode
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains (PyCharm, WebStorm, dll.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encdata
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+
+# ─────────────────────────────────────────
+#  MISC / TOOLING
+# ─────────────────────────────────────────
+scratch/
+*.tmp
+*.bak
+*.swp
+*.swo
+.turbo/
+.vercel/
+.netlify/
+
