@@ -49,6 +49,8 @@ coverage.xml
 
 # pyenv / pipenv / poetry
 .python-version
+# Runtime backend dipin agar deployment tidak kembali ke Python sebelum rilis keamanan terbaru.
+!backend/.python-version
 Pipfile.lock
 poetry.lock
 

@@ -113,10 +113,15 @@ Untuk Docker dengan GUI virtual, buka URL noVNC yang dikembalikan oleh
 
 ## Instalasi lokal
 
+Backend ditargetkan untuk **Python 3.15.2**. Rilis ini memuat perbaikan keamanan
+untuk sertifikat intermediate eMudhra yang dikompromikan. Gunakan patch release
+3.15 terbaru bila tersedia; jangan gunakan Python 3.10 yang sudah end-of-life.
+
 ```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+py -3.15 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 playwright install chromium
 uvicorn main_api:app --reload --host 0.0.0.0 --port 8080
 ```
