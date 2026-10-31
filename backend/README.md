@@ -1,8 +1,7 @@
 # Social Media Data Scraper
 
 Backend FastAPI untuk mengumpulkan data publik dari X (Twitter) dan Threads
-berdasarkan keyword atau URL postingan. Project ini tidak lagi memuat model
-machine learning atau melakukan klasifikasi ujaran kebencian.
+berdasarkan keyword atau URL postingan.
 
 ## Fitur
 
@@ -11,7 +10,7 @@ machine learning atau melakukan klasifikasi ujaran kebencian.
 - Pengumpulan postingan dan komentar/reply.
 - Input keyword atau direct URL.
 - Persistent browser session untuk X dan Threads.
-- Login interaktif melalui browser native atau noVNC.
+- Login interaktif melalui browser native.
 - Headless maupun headed browser.
 - Infinite scroll dan lazy-loading scan.
 - Filter teks sistem dan deduplikasi.
@@ -108,8 +107,7 @@ storage/sessions/x_profile/
 storage/sessions/threads_profile/
 ```
 
-Untuk Docker dengan GUI virtual, buka URL noVNC yang dikembalikan oleh
-`GET /api/v1/auth/status` atau response trigger login.
+Login interaktif dilakukan melalui browser native yang terbuka langsung di desktop.
 
 ## Instalasi lokal
 
@@ -141,6 +139,4 @@ python tests\check_pipeline_text_columns.py
 
 ## Dependensi
 
-Runtime tidak lagi membutuhkan PyTorch, Transformers, tokenizer, GPU, atau
-artefak model IndoBERT. Dependensi utama hanya FastAPI, Pandas, Playwright,
-Parsel, Rich, tqdm, dan utilitas konfigurasi.
+Dependensi utama: FastAPI, Pandas, Playwright, Parsel, Rich, tqdm, dan utilitas konfigurasi.
