@@ -35,16 +35,6 @@ storage/exports/*.parquet
 !storage/dictionaries/README.md
 !storage/dictionaries/.gitkeep
 
-# Model weights (>100MB rejected by GitHub)
-saved_models/**/*.pt
-saved_models/**/*.bin
-saved_models/**/*.safetensors
-saved_models/**/*.onnx
-!saved_models/**/README.md
-!saved_models/**/.gitkeep
-!saved_models/**/model_config.json
-!saved_models/**/label_mapping.json
-
 # Scratch & testing
 .pytest_cache/
 .coverage

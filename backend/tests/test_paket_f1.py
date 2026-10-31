@@ -7,6 +7,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
+
 from app.schemas.scrape_schema import ScrapeRunRequest
 from app.services.job_service import JobManager
 from app.services.pipeline_service import PipelineService, pipeline_service
@@ -60,7 +64,7 @@ class SafeExportPathTest(unittest.TestCase):
 
 
 class ScrapeStatisticsTest(unittest.IsolatedAsyncioTestCase):
-    async def test_scrape_job_does_not_require_predictor(self):
+    async def test_scrape_job_statistics(self):
         class FakePipeline:
             async def run(self, **kwargs):
                 return {

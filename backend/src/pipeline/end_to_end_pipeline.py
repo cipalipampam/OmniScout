@@ -181,7 +181,7 @@ class EndToEndPipeline:
 
 
     def compute_statistics(self, df: pd.DataFrame) -> Dict[str, Any]:
-        """Hitung ringkasan data scraping tanpa klasifikasi model."""
+        """Hitung ringkasan data scraping."""
         if df.empty:
             return {
                 "total_data": 0,

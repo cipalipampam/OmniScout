@@ -20,7 +20,7 @@ ENDPOINT_DIHARAPKAN = {
     "/api/v1/pipeline/run",
     "/api/v1/pipeline/status/{job_id}",
     "/api/v1/pipeline/exports/{filename}",
-    # Health & root (root dipakai healthcheck docker-compose.yml)
+    # Health & root
     "/api/v1/health",
     "/",
 }

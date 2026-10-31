@@ -130,21 +130,6 @@ backend/storage/exports/*.parquet
 
 
 # ─────────────────────────────────────────
-#  SAVED MODELS (file besar > 100 MB)
-# ─────────────────────────────────────────
-backend/saved_models/**/*.pt
-backend/saved_models/**/*.bin
-backend/saved_models/**/*.safetensors
-backend/saved_models/**/*.onnx
-
-# Tapi tetap simpan metadata
-!backend/saved_models/**/README.md
-!backend/saved_models/**/.gitkeep
-!backend/saved_models/**/model_config.json
-!backend/saved_models/**/label_mapping.json
-
-
-# ─────────────────────────────────────────
 #  EDITOR & OS
 # ─────────────────────────────────────────
 
