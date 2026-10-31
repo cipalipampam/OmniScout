@@ -24,7 +24,7 @@ router = APIRouter(prefix="/auth", tags=["Autentikasi & Sesi"])
         "Memeriksa ketersediaan dan keabsahan sesi login browser persisten "
         "untuk platform X (Twitter) dan Threads. "
         "Menyertakan `login_environment` (runtime + mode GUI) agar frontend tahu "
-        "apakah login interaktif muncul di noVNC (Docker) atau di desktop user (lokal). "
+        "ketersediaan GUI browser di desktop user. "
         "Tidak membuka browser; didelegasikan ke AuthService untuk memeriksa kondisi filesystem."
     ),
 )
@@ -37,12 +37,11 @@ def get_session_status() -> AllSessionsStatusResponse:
     "/login-trigger/{platform}",
     response_model=LoginTriggerResponse,
     status_code=status.HTTP_202_ACCEPTED,
-    summary="Trigger Login Interaktif (noVNC / Browser Native)",
+    summary="Trigger Login Interaktif",
     description=(
         "Memicu proses login interaktif Playwright GUI untuk platform tertentu. "
         "Proses berjalan di background via BackgroundTasks. "
-        "Mode GUI mengikuti runtime: Docker menampilkan browser di noVNC, "
-        "runtime lokal membuka browser langsung di desktop user."
+        "Browser akan terbuka langsung di desktop user."
     ),
 )
 async def trigger_login(
@@ -58,36 +57,25 @@ async def trigger_login(
 
     if env.gui_mode == "unavailable":
         logger.warning(f"Login trigger gagal — display tidak tersedia: {env.message}")
-        hint = "Coba restart container backend." if env.runtime == "docker" else (
-            "Jalankan backend di host dengan desktop/GUI, atau set up virtual display."
-        )
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=(
                 f"Layanan GUI tidak tersedia untuk platform {platform_name}. "
-                f"Detail: {env.message} {hint}"
+                f"Detail: {env.message} Jalankan backend di host dengan desktop/GUI."
             ),
         )
 
     # Delegasikan task worker ke AuthService
     background_tasks.add_task(auth_service.run_login_task, platform)
 
-    if env.gui_mode == "novnc":
-        msg = (
-            f"Proses login {platform_name} sedang diinisiasi di background. "
-            "Browser GUI berjalan pada virtual display container. "
-            f"Buka {env.novnc_url} di browser Anda untuk melihat dan menyelesaikan login. "
-            "Setelah selesai, cek status sesi di GET /api/v1/auth/status."
-        )
-    else:
-        msg = (
-            f"Proses login {platform_name} sedang diinisiasi di background. "
-            "Jendela browser akan terbuka langsung di desktop perangkat ini — "
-            "selesaikan login pada jendela tersebut. "
-            "Setelah selesai, cek status sesi di GET /api/v1/auth/status."
-        )
+    msg = (
+        f"Proses login {platform_name} sedang diinisiasi di background. "
+        "Jendela browser akan terbuka langsung di desktop perangkat ini — "
+        "selesaikan login pada jendela tersebut. "
+        "Setelah selesai, cek status sesi di GET /api/v1/auth/status."
+    )
 
-    logger.info(f"Login trigger diterima untuk platform: {platform} (mode GUI: {env.gui_mode})")
+    logger.info(f"Login trigger diterima untuk platform: {platform}")
 
     return LoginTriggerResponse(
         platform=platform,

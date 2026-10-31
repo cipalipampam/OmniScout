@@ -14,21 +14,17 @@ class SessionStatusItem(BaseModel):
 
 
 class LoginEnvironmentInfo(BaseModel):
-    """Sumber kebenaran mode GUI login: 'novnc' (Docker) / 'native' (lokal) / 'unavailable'."""
+    """Sumber kebenaran mode GUI login: 'native' (desktop) / 'unavailable'."""
 
-    runtime: Literal["docker", "local"] = Field(
-        description="Runtime backend: 'docker' (dalam container) atau 'local' (host langsung)."
+    runtime: Literal["local"] = Field(
+        default="local",
+        description="Runtime backend: 'local' (host langsung)."
     )
-    gui_mode: Literal["novnc", "native", "unavailable"] = Field(
+    gui_mode: Literal["native", "unavailable"] = Field(
         description=(
-            "'novnc' = GUI live di virtual display container (harus dipantau lewat noVNC); "
             "'native' = jendela browser muncul langsung di desktop user; "
             "'unavailable' = tidak ada display server, login interaktif tidak mungkin."
         )
-    )
-    novnc_url: Optional[str] = Field(
-        default=None,
-        description="URL viewer noVNC yang bisa dibuka user; hanya terisi saat gui_mode='novnc'.",
     )
     message: str = Field(description="Penjelasan kondisi GUI yang siap ditampilkan apa adanya di UI.")
 
@@ -49,5 +45,5 @@ class LoginTriggerResponse(BaseModel):
 
     platform: str = Field(description="Platform yang ditargetkan ('x' atau 'threads').")
     status: str = Field(description="Status inisiasi (misal: 'initiated').")
-    message: str = Field(description="Petunjuk interaksi visual (noVNC bila runtime Docker, jendela desktop bila lokal).")
+    message: str = Field(description="Petunjuk interaksi visual (jendela browser di desktop).")
 

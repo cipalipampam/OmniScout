@@ -76,7 +76,7 @@ def _has_auth_cookies(profile_path: Path, platform: str) -> dict:
     allowed_hosts  = AUTH_COOKIE_HOSTS.get(platform, ())
     result = {"valid": False, "matched_names": set(), "matched_hosts": set(), "seen_hosts": set()}
 
-    # Cek lokasi standar database cookie Chromium terlebih dahulu (hindari glob rekursif ribuan file di Docker mount)
+    # Cek lokasi standar database cookie Chromium terlebih dahulu (hindari glob rekursif ribuan file)
     candidate_dbs = [
         profile_path / "Default" / "Cookies",
         profile_path / "Default" / "Network" / "Cookies",
@@ -163,7 +163,7 @@ def is_session_valid(platform: str) -> dict:
             children = list(p.iterdir())
             has_data = len(children) > 0
             if has_data:
-                # Cek mtime dari file cookie atau folder profil langsung (hindari rglob ribuan file cache di Docker)
+                # Cek mtime dari file cookie atau folder profil langsung (hindari rglob ribuan file cache)
                 cookie_candidates = [
                     p / "Default" / "Cookies",
                     p / "Default" / "Network" / "Cookies",
